@@ -8,9 +8,11 @@
                     <tab-item @on-item-click="onItemClick">电表</tab-item>
                 </tab>
             </sticky>
-            <popup-picker :data="popupData.list" v-model="popupData.value" :columns="1" class="lg-picker" @on-change="popupChange"></popup-picker>
+           <popup-picker :data="popupData.list" v-model="popupData.value" :columns="1" class="lg-picker" @on-change="popupChange"></popup-picker>
             <div>
-                <cell class="lg-cell" :title="i.roomNumber" :value="i.watchNumber" v-for="i in cellData" @click.native="cellClick(i.roomId)"></cell>
+                <cell class="lg-cell" :title="i.roomNumber"  v-for="i in cellData"
+                 @click.native="cellClick(i.roomId)" 
+                 :value="i.watchNumber !=null ? i.watchNumber : i.remark"></cell>
             </div>
         </scroller > 
         <second-page></second-page>
@@ -40,7 +42,7 @@ export default {
             ],
             formData : {
                 feeType: 'water',
-                propertyId:12,
+                propertyId:0,
                 cellId:'',
             },
         };
@@ -74,27 +76,27 @@ export default {
     methods: {
         //与安卓，ios,java的通信方法
         newName(propertyId,userId,tokenId)  {
-            // window.localStorage.setItem('propertyId',propertyId);
+            window.localStorage.setItem('propertyId',propertyId);
             window.localStorage.setItem('token',tokenId);
             window.localStorage.setItem('userId',userId);
             this.cellList();
-            // alert(propertyId)
+            
         },
         cellList(){
-            // this.formData.propertyId = window.localStorage.getItem('propertyId');
+            this.formData.propertyId = window.localStorage.getItem('propertyId');
             cellListRequest(this.formData).then(res=>{
                 var data = res.data;
-                this.popupData.value = [];
-                this.popupData.value.push(res.data[0].cellName);
-                this.formData.cellId = res.data[0].cellId;
-                for (var i = 0; i < data.length; i++) {
+
+                 for (var i = 0; i < data.length; i++) {
                     this.popupData.list.push({
                         'cellId':data[i].cellId,
                         'name':data[i].cellName,
                         'value':data[i].cellName
                     })
                 }
-                this.roomList();
+                this.popupData.value = [];
+                this.popupData.value.push(res.data[0].cellName);
+            
             })
         },
         roomList(){
@@ -103,9 +105,9 @@ export default {
             })
         },
         popupChange(value){
+            this.popupData.value = value;
             for(var i of this.popupData.list){
                 if(i.value == value){
-                    this.popupData.value = [i.name];
                     this.formData.cellId = i.cellId;
                 }
             }
