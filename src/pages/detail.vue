@@ -65,8 +65,11 @@ export default {
         submit(){
             this.roomWatch.userId = window.localStorage.getItem('userId');
             saveRoomWatchNumberRequest(this.roomWatch).then(res=>{
-                localStorage.setItem('cell',JSON.stringify({'roomId':this.roomWatch.roomId,'watchNumber':this.roomWatch.watchNumber}));
-                // console.log(res)
+                localStorage.setItem('cell',JSON.stringify(
+                    {'roomId':this.roomWatch.roomId,
+                    'watchNumber':this.roomWatch.watchNumber,
+                    'remark':this.roomWatch.remark}));
+                console.log(res)
                 alert('保存成功');
                 window.history.go(-1);
             })

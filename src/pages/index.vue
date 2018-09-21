@@ -61,9 +61,11 @@ export default {
             if(from.path == '/detail'){
                 var cell = JSON.parse(localStorage.getItem('cell'));
                 if(cell){
+                    console.log(cell)
                     for(var i of this.cellData){
                         if(i.roomId == cell.roomId){
                             i.watchNumber = cell.watchNumber;
+                            i.remark = cell.remark;
                         }
                     }
                 }
