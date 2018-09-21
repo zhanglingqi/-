@@ -11,7 +11,7 @@ var instance = axios.create({
         'Content-Type': 'application/x-www-form-urlencoded',
     },
     timeout: 8000,
-	baseURL: 'http://192.168.1.160:8091'      //接口地址
+	baseURL: 'http://rd.pmapi.guangheplus.com' //接口地址
 })
 
 //请求拦截器

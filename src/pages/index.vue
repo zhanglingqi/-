@@ -1,7 +1,6 @@
 <template>
     <div class="page">
         <lg-header></lg-header>
-        <input type="text"  @click="qqqq">
         <scroller class="scroll"> 
             <sticky :check-sticky-support="false" :offset="0">
                 <tab v-model="tabModel" bar-active-color="#26a2ff" active-color="#26a2ff">
@@ -119,19 +118,6 @@ export default {
         cellClick(id){
             this.$router.push({path:'/detail',query:{roomId:id,type:this.tabModel}});
         },
-        qqqq() {
-             var u = navigator.userAgent, app = navigator.appVersion;
-            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-            if (isAndroid) {
-            //这个是安卓操作系统
-            alert(1)
-            }
-            if (isIOS) {
-        　　　　//这个是ios操作系统
-            alert(2)
-            }
-        }
     }
 }
 </script>

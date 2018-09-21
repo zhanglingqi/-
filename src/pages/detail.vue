@@ -4,7 +4,7 @@
         <scroller class="scroll"> 
             <div class="lg-con">
                 <div class="row">{{roomWatch.roomNumber}}</div>
-                <input Type="number" @click="aios"placeholder=place v-model="roomWatch.watchNumber" class="lg-input">
+                <input Type="number" pattern="\d*" @click="aios" placeholder=place v-model="roomWatch.watchNumber" class="lg-input">
 
                 <x-textarea placeholder="备注" class="lg-text" :height="160" v-model="roomWatch.remark"></x-textarea>
                 <x-button type="primary" @click.native="submit">保存</x-button>
@@ -63,7 +63,7 @@ export default {
             })
         },
         submit(){
-            this.roomWatch.userId = window.localStorage.getItem('userId');
+            // this.roomWatch.userId = window.localStorage.getItem('userId');
             saveRoomWatchNumberRequest(this.roomWatch).then(res=>{
                 localStorage.setItem('cell',JSON.stringify({'roomId':this.roomWatch.roomId,'watchNumber':this.roomWatch.watchNumber}));
                 alert('保存成功');
@@ -79,11 +79,11 @@ export default {
             var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
             if (isAndroid) {
             //这个是安卓操作系统
-            alert(1)
+            // alert(1)
             }
             if (isIOS) {
         　　　　//这个是ios操作系统
-            alert(2)
+            // alert(2)
             }
         }
     }
